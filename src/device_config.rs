@@ -1,0 +1,88 @@
+#[derive(Debug, Clone, Copy)]
+pub struct SwitchConfig {
+    pub released_value: u8,
+    pub pressed_value: u8,
+}
+
+impl Default for SwitchConfig {
+    fn default() -> Self {
+        Self {
+            released_value: 0,
+            pressed_value: 127,
+        }
+    }
+}
+
+
+
+#[derive(Debug, Clone, Copy)]
+pub struct ContinuousConfig {
+    pub minimum_input: u8,
+    pub maximum_input: u8,
+    pub minimum_output: u8,
+    pub maximum_output: u8,
+    pub drive: u8,
+}
+
+impl Default for ContinuousConfig {
+    fn default() -> Self {
+        Self {
+            minimum_input: 0,
+            maximum_input: 127,
+            minimum_output: 0,
+            maximum_output: 127,
+            drive: 64,
+        }
+    }
+}
+
+
+
+#[derive(Default, Debug, Clone, Copy, PartialEq, strum::Display, strum::VariantArray)]
+pub enum InputMode {
+    #[default] Switch,
+    Continuous,
+    MomentaryAsToggle,
+    ToggleAsMomentary,
+}
+
+#[derive(Default, Debug, Clone, Copy)]
+pub struct InputConfig {
+    pub mode: InputMode,
+    pub switch: SwitchConfig,
+    pub continuous: ContinuousConfig,
+}
+
+
+
+#[derive(Default, Debug, Clone, Copy)]
+pub struct ChannelConfig {
+    pub input: InputConfig,
+    pub cc: u8,
+    pub label: [u8; ChannelConfig::LABEL_SIZE],
+}
+
+impl ChannelConfig {
+    const LABEL_SIZE: usize = 32;
+
+    pub fn default_with_index(index: usize) -> Self {
+        let mut config = ChannelConfig::default();
+        config.cc = index as u8;
+        config
+    }
+}
+
+
+
+#[derive(Debug)]
+pub struct DeviceConfig<const CHANNELS: usize> {
+    pub channels: [ChannelConfig; CHANNELS],
+}
+
+impl Default for DeviceConfig<4> {
+    fn default() -> Self {
+        Self {
+            channels: std::array::from_fn(|i| ChannelConfig::default_with_index(i)),
+        }
+    }
+}
