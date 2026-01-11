@@ -44,13 +44,21 @@ impl App {
             .iter()
             .enumerate()
             .map(|(c, channel)| {
-                channel_strip(
-                    c,
-                    channel,
-                    subtle,
-                    move |config| Message::ChannelConfigChanged(c, config),
-                )
+                column![
+                    channel_strip(
+                        c,
+                        channel,
+                        subtle,
+                        move |config| Message::ChannelConfigChanged(c, config),
+                    )
+                ]
+                    .align_x(Center)
+                    .width(Fill)
+                    .height(Fill)
+                    .into()
         }))
+            .padding(8)
+            .spacing(8)
             .width(Fill)
             .height(Fill)
             .into()

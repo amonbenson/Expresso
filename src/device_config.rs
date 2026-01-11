@@ -121,6 +121,17 @@ impl ChannelConfig {
         self.label = label;
         self
     }
+
+    pub fn with_label_str(mut self, label_str: &str) -> Self {
+        self.label = std::array::from_fn(|i| label_str.as_bytes().get(i).copied().unwrap_or(0));
+        self
+    }
+
+    pub fn label_as_str(&self) -> &str {
+        // Find the first null byte or use the full length
+        let end = self.label.iter().position(|&b| b == 0).unwrap_or(Self::LABEL_SIZE);
+        std::str::from_utf8(&self.label[..end]).unwrap_or("")
+    }
 }
 
 

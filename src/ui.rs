@@ -1,5 +1,5 @@
 use iced::{Center, Element, Fill};
-use iced::widget::{column, pick_list, row, text, Row};
+use iced::widget::{column, pick_list, row, text, text_input, Row};
 use iced_aw::number_input;
 use std::ops::RangeInclusive;
 use strum::VariantArray;
@@ -46,9 +46,10 @@ where
             Some(&channel.input.mode),
             {
                 let ch = channel_clone;
-                move |mode| on_change(ch.with_input_mode(mode))
+                move |value| on_change(ch.with_input_mode(value))
             },
-        ),
+        )
+            .width(Fill),
         match channel.input.mode {
             InputMode::Continuous => column![
                 knob(
@@ -140,9 +141,15 @@ where
             .spacing(4)
             .align_y(Center)
             .width(Fill),
+        text_input("Label", channel.label_as_str())
+            .on_input({
+                let ch = channel_clone;
+                move |label_str| on_change(ch.with_label_str(&label_str))
+            })
+            .width(Fill),
     ]
         .align_x(Center)
-        .width(Fill)
+        .width(200)
         .height(Fill)
         .into()
 }
