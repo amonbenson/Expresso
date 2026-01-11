@@ -1,10 +1,13 @@
-use iced::{Center, Element, Fill};
+use iced::{Center, Element, Fill, Padding, Pixels};
 use iced::widget::{column, pick_list, row, text, text_input, Row};
 use iced_aw::number_input;
 use std::ops::RangeInclusive;
 use strum::VariantArray;
 
 use crate::device_config::{ChannelConfig, InputMode};
+
+pub const SPACING: Pixels = Pixels(8.);
+pub const PADDING: Padding = Padding::new(8.);
 
 pub fn knob<'a, Message: Clone + 'a, F>(
     label: &'a str,
@@ -21,7 +24,7 @@ where
         number_input(value, range, on_change)
             .width(Fill),
     ]
-    .spacing(4)
+    .spacing(SPACING)
     .align_y(Center)
     .width(Fill)
 }
@@ -44,10 +47,7 @@ where
         pick_list(
             InputMode::VARIANTS,
             Some(&channel.input.mode),
-            {
-                let ch = channel_clone;
-                move |value| on_change(ch.with_input_mode(value))
-            },
+            move |value| on_change(channel_clone.with_input_mode(value)),
         )
             .width(Fill),
         match channel.input.mode {
@@ -56,98 +56,63 @@ where
                     "Min In:",
                     &channel.input.continuous.minimum_input,
                     0..=127,
-                    {
-                        let ch = channel_clone;
-                        move |value| on_change(ch.with_minimum_input(value))
-                    }
+                    move |value| on_change(channel_clone.with_minimum_input(value)),
                 ),
                 knob(
                     "Max In:",
                     &channel.input.continuous.maximum_input,
                     0..=127,
-                    {
-                        let ch = channel_clone;
-                        move |value| on_change(ch.with_maximum_input(value))
-                    }
+                    move |value| on_change(channel_clone.with_maximum_input(value)),
                 ),
                 knob(
                     "Min Out:",
                     &channel.input.continuous.minimum_output,
                     0..=127,
-                    {
-                        let ch = channel_clone;
-                        move |value| on_change(ch.with_minimum_output(value))
-                    }
+                    move |value| on_change(channel_clone.with_minimum_output(value)),
                 ),
                 knob(
                     "Max Out:",
                     &channel.input.continuous.maximum_output,
                     0..=127,
-                    {
-                        let ch = channel_clone;
-                        move |value| on_change(ch.with_maximum_output(value))
-                    }
+                    move |value| on_change(channel_clone.with_maximum_output(value)),
                 ),
                 knob(
                     "Drive:",
                     &channel.input.continuous.drive,
                     0..=127,
-                    {
-                        let ch = channel_clone;
-                        move |value| on_change(ch.with_drive(value))
-                    }
+                    move |value| on_change(channel_clone.with_drive(value)),
                 ),
-            ]
-                .align_x(Center)
-                .width(Fill)
-                .height(Fill),
+            ],
             _ => column![
                 knob(
                     "Released Val:",
                     &channel.input.switch.released_value,
                     0..=127,
-                    {
-                        let ch = channel_clone;
-                        move |value| on_change(ch.with_released_value(value))
-                    }
+                    move |value| on_change(channel_clone.with_released_value(value)),
                 ),
                 knob(
                     "Pressed Val:",
                     &channel.input.switch.pressed_value,
                     0..=127,
-                    {
-                        let ch = channel_clone;
-                        move |value| on_change(ch.with_pressed_value(value))
-                    }
+                    move |value| on_change(channel_clone.with_pressed_value(value)),
                 ),
-            ]
-                .align_x(Center)
-                .width(Fill)
-                .height(Fill),
-        },
-        row![
-            text("CC:")
-                .width(Fill),
-            number_input(
-                &(channel.cc + 1),
-                1..=128,
-                {
-                    let ch = channel_clone;
-                    move |value| on_change(ch.with_cc(value - 1))
-                }
-            )
-                .width(Fill),
-        ]
-            .spacing(4)
-            .align_y(Center)
-            .width(Fill),
+            ],
+        }
+            .spacing(SPACING)
+            .align_x(Center)
+            .width(Fill)
+            .height(Fill),
+        knob(
+            "CC:",
+            &channel.cc,
+            1..=128,
+            move |value| on_change(channel_clone.with_cc(value)),
+        ),
         text_input("Label", channel.label_as_str())
-            .on_input({
-                let ch = channel_clone;
-                move |label_str| on_change(ch.with_label_str(&label_str))
-            })
+            .on_input(move |label_str| on_change(channel_clone.with_label_str(&label_str)))
             .width(Fill),
     ]
+        .spacing(SPACING)
         .align_x(Center)
         .width(200)
         .height(Fill)

@@ -1,11 +1,8 @@
-use iced::futures::channel;
-use iced::{Center, Element, Fill, Left, Right, Theme};
-use iced::widget::{button, column, combo_box, pick_list, row, table, text};
-use iced_aw::number_input;
-use strum::VariantArray;
+use iced::{Center, Element, Fill, Theme};
+use iced::widget::{column, row, text};
 
-use crate::device_config::{ChannelConfig, DeviceConfig, InputMode};
-use crate::ui::channel_strip;
+use crate::device_config::{ChannelConfig, DeviceConfig};
+use crate::ui::{PADDING, SPACING, channel_strip};
 
 mod ui;
 mod device_config;
@@ -57,8 +54,8 @@ impl App {
                     .height(Fill)
                     .into()
         }))
-            .padding(8)
-            .spacing(8)
+            .padding(PADDING)
+            .spacing(SPACING)
             .width(Fill)
             .height(Fill)
             .into()
@@ -68,6 +65,7 @@ impl App {
 fn main() -> iced::Result {
     iced::application(App::default, App::update, App::view)
         .theme(Theme::KanagawaDragon)
+        .font(iced_aw::ICED_AW_FONT_BYTES)
         .title(App::title)
         .centered()
         .run()

@@ -40,8 +40,8 @@ impl Default for ContinuousConfig {
 
 #[derive(Default, Debug, Clone, Copy, PartialEq, strum::Display, strum::VariantArray)]
 pub enum InputMode {
-    #[default] Switch,
-    Continuous,
+    Switch,
+    #[default] Continuous,
     MomentaryAsToggle,
     ToggleAsMomentary,
 }
