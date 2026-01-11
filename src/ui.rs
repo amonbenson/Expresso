@@ -1,5 +1,5 @@
-use iced::{Center, Element, Fill, Padding, Pixels, Theme};
-use iced::widget::{Column, column, pick_list, row, text, text_input};
+use iced::{Center, Element, Fill, Padding, Pixels, Renderer, Theme};
+use iced::widget::{Column, Row, button, column, pick_list, row, text, text_input};
 use num_traits::{Bounded, Num, NumAssignOps};
 use std::fmt::Display;
 use std::ops::{RangeInclusive};
@@ -63,6 +63,20 @@ pub fn channel_strip<'a, Message: Clone + 'a>(
             move |value| on_change(channel_clone.with_input_mode(value)),
         )
             .width(Fill),
+        // row![
+        //     button("C")
+        //         .on_press_with(move || on_change(channel_clone.with_input_mode(InputMode::Continuous)))
+        //         .style(if channel.input.mode == InputMode::Continuous { button::primary } else { button::text }),
+        //     button("S")
+        //         .on_press_with(move || on_change(channel_clone.with_input_mode(InputMode::Switch)))
+        //         .style(if channel.input.mode == InputMode::Switch { button::primary } else { button::text }),
+        //     button("M→T")
+        //         .on_press_with(move || on_change(channel_clone.with_input_mode(InputMode::MomentaryAsToggle)))
+        //         .style(if channel.input.mode == InputMode::MomentaryAsToggle { button::primary } else { button::text }),
+        //     button("T→M")
+        //         .on_press_with(move || on_change(channel_clone.with_input_mode(InputMode::ToggleAsMomentary)))
+        //         .style(if channel.input.mode == InputMode::ToggleAsMomentary { button::primary } else { button::text }),
+        // ],
         match channel.input.mode {
             InputMode::Continuous => column![
                 row![
@@ -133,7 +147,7 @@ pub fn channel_strip<'a, Message: Clone + 'a>(
         labeled_knob(
             "CC",
             &channel.cc,
-            1..=128,
+            0..=127,
             move |value| on_change(channel_clone.with_cc(value)),
         ),
         text_input("Label", channel.label_as_str())
