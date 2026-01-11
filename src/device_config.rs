@@ -70,6 +70,57 @@ impl ChannelConfig {
         config.cc = index as u8;
         config
     }
+
+    // Builder-style methods for updating config fields
+    pub fn with_input_mode(mut self, mode: InputMode) -> Self {
+        self.input.mode = mode;
+        self
+    }
+
+    pub fn with_released_value(mut self, value: u8) -> Self {
+        self.input.switch.released_value = value;
+        self
+    }
+
+    pub fn with_pressed_value(mut self, value: u8) -> Self {
+        self.input.switch.pressed_value = value;
+        self
+    }
+
+    pub fn with_minimum_input(mut self, value: u8) -> Self {
+        self.input.continuous.minimum_input = value;
+        self
+    }
+
+    pub fn with_maximum_input(mut self, value: u8) -> Self {
+        self.input.continuous.maximum_input = value;
+        self
+    }
+
+    pub fn with_minimum_output(mut self, value: u8) -> Self {
+        self.input.continuous.minimum_output = value;
+        self
+    }
+
+    pub fn with_maximum_output(mut self, value: u8) -> Self {
+        self.input.continuous.maximum_output = value;
+        self
+    }
+
+    pub fn with_drive(mut self, value: u8) -> Self {
+        self.input.continuous.drive = value;
+        self
+    }
+
+    pub fn with_cc(mut self, value: u8) -> Self {
+        self.cc = value;
+        self
+    }
+
+    pub fn with_label(mut self, label: [u8; Self::LABEL_SIZE]) -> Self {
+        self.label = label;
+        self
+    }
 }
 
 

@@ -45,12 +45,8 @@ where
             InputMode::VARIANTS,
             Some(&channel.input.mode),
             {
-                let channel_clone = channel_clone.clone();
-                move |mode| {
-                    let mut new_config = channel_clone.clone();
-                    new_config.input.mode = mode;
-                    on_change(new_config)
-                }
+                let ch = channel_clone;
+                move |mode| on_change(ch.with_input_mode(mode))
             },
         ),
         match channel.input.mode {
@@ -60,12 +56,8 @@ where
                     &channel.input.continuous.minimum_input,
                     0..=127,
                     {
-                        let channel_clone = channel_clone.clone();
-                        move |value| {
-                            let mut new_config = channel_clone.clone();
-                            new_config.input.continuous.minimum_input = value;
-                            on_change(new_config)
-                        }
+                        let ch = channel_clone;
+                        move |value| on_change(ch.with_minimum_input(value))
                     }
                 ),
                 knob(
@@ -73,12 +65,8 @@ where
                     &channel.input.continuous.maximum_input,
                     0..=127,
                     {
-                        let channel_clone = channel_clone.clone();
-                        move |value| {
-                            let mut new_config = channel_clone.clone();
-                            new_config.input.continuous.maximum_input = value;
-                            on_change(new_config)
-                        }
+                        let ch = channel_clone;
+                        move |value| on_change(ch.with_maximum_input(value))
                     }
                 ),
                 knob(
@@ -86,12 +74,8 @@ where
                     &channel.input.continuous.minimum_output,
                     0..=127,
                     {
-                        let channel_clone = channel_clone.clone();
-                        move |value| {
-                            let mut new_config = channel_clone.clone();
-                            new_config.input.continuous.minimum_output = value;
-                            on_change(new_config)
-                        }
+                        let ch = channel_clone;
+                        move |value| on_change(ch.with_minimum_output(value))
                     }
                 ),
                 knob(
@@ -99,12 +83,8 @@ where
                     &channel.input.continuous.maximum_output,
                     0..=127,
                     {
-                        let channel_clone = channel_clone.clone();
-                        move |value| {
-                            let mut new_config = channel_clone.clone();
-                            new_config.input.continuous.maximum_output = value;
-                            on_change(new_config)
-                        }
+                        let ch = channel_clone;
+                        move |value| on_change(ch.with_maximum_output(value))
                     }
                 ),
                 knob(
@@ -112,12 +92,8 @@ where
                     &channel.input.continuous.drive,
                     0..=127,
                     {
-                        let channel_clone = channel_clone.clone();
-                        move |value| {
-                            let mut new_config = channel_clone.clone();
-                            new_config.input.continuous.drive = value;
-                            on_change(new_config)
-                        }
+                        let ch = channel_clone;
+                        move |value| on_change(ch.with_drive(value))
                     }
                 ),
             ]
@@ -130,12 +106,8 @@ where
                     &channel.input.switch.released_value,
                     0..=127,
                     {
-                        let channel_clone = channel_clone.clone();
-                        move |value| {
-                            let mut new_config = channel_clone.clone();
-                            new_config.input.switch.released_value = value;
-                            on_change(new_config)
-                        }
+                        let ch = channel_clone;
+                        move |value| on_change(ch.with_released_value(value))
                     }
                 ),
                 knob(
@@ -143,12 +115,8 @@ where
                     &channel.input.switch.pressed_value,
                     0..=127,
                     {
-                        let channel_clone = channel_clone.clone();
-                        move |value| {
-                            let mut new_config = channel_clone.clone();
-                            new_config.input.switch.pressed_value = value;
-                            on_change(new_config)
-                        }
+                        let ch = channel_clone;
+                        move |value| on_change(ch.with_pressed_value(value))
                     }
                 ),
             ]
@@ -163,12 +131,8 @@ where
                 &(channel.cc + 1),
                 1..=128,
                 {
-                    let channel_clone = channel_clone.clone();
-                    move |value| {
-                        let mut new_config = channel_clone.clone();
-                        new_config.cc = value - 1;
-                        on_change(new_config)
-                    }
+                    let ch = channel_clone;
+                    move |value| on_change(ch.with_cc(value - 1))
                 }
             )
                 .width(Fill),
