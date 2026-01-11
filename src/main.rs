@@ -1,17 +1,12 @@
 use iced::{Center, Element, Fill, Theme};
-use iced::widget::{column, row, text};
+use iced::widget::{column, row};
 
 use crate::device_config::{ChannelConfig, DeviceConfig};
 use crate::ui::{PADDING, SPACING, channel_strip};
 
+mod widgets;
 mod ui;
 mod device_config;
-
-fn subtle(theme: &Theme) -> text::Style {
-    text::Style {
-        color: Some(theme.extended_palette().background.strongest.color),
-    }
-}
 
 #[derive(Debug, Clone)]
 enum Message {
@@ -45,7 +40,6 @@ impl App {
                     channel_strip(
                         c,
                         channel,
-                        subtle,
                         move |config| Message::ChannelConfigChanged(c, config),
                     )
                 ]

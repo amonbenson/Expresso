@@ -1,49 +1,64 @@
-use iced::{Center, Element, Fill, Padding, Pixels};
-use iced::widget::{column, pick_list, row, text, text_input, Row};
-use iced_aw::number_input;
-use std::ops::RangeInclusive;
+use iced::{Center, Element, Fill, Padding, Pixels, Theme};
+use iced::widget::{column, row, pick_list, text, text_input, Column};
+use num_traits::{Bounded, Num, NumAssignOps};
+use std::fmt::Display;
+use std::ops::{RangeInclusive};
+use std::str::FromStr;
 use strum::VariantArray;
 
+use crate::widgets::knob::knob;
 use crate::device_config::{ChannelConfig, InputMode};
 
 pub const SPACING: Pixels = Pixels(8.);
 pub const PADDING: Padding = Padding::new(8.);
 
-pub fn knob<'a, Message: Clone + 'a, F>(
-    label: &'a str,
-    value: &'a u8,
-    range: RangeInclusive<u8>,
-    on_change: F,
-) -> Row<'a, Message>
-where
-    F: Fn(u8) -> Message + Copy + 'static,
-{
-    row![
-        text(label)
-            .width(Fill),
-        number_input(value, range, on_change)
-            .width(Fill),
-    ]
-    .spacing(SPACING)
-    .align_y(Center)
-    .width(Fill)
+fn subtle(theme: &Theme) -> text::Style {
+    text::Style {
+        color: Some(theme.extended_palette().background.strongest.color),
+    }
 }
 
-pub fn channel_strip<'a, Message: Clone + 'a, F>(
+pub fn labeled_knob<'a, Message: Clone + 'a, T, F>(
+    label: &'a str,
+    value: &'a T,
+    range: RangeInclusive<T>,
+    on_change: F,
+) -> Column<'a, Message>
+where
+    T: Num + NumAssignOps + PartialOrd + Ord + Display + FromStr + Clone + Bounded,
+    F: Fn(T) -> Message + Copy + 'static,
+{
+    column![
+        text(label)
+            .size(16)
+            .style(subtle)
+            .align_x(Center),
+        knob(),
+        text_input("", &value.to_string())
+            .on_input(move |s| {
+                let value: T = s.parse().unwrap_or(T::zero()); // parse string value
+                let value = value.max(range.start().clone()).min(range.end().clone()); // clamp to range
+                on_change(value)
+            })
+            .width(64)
+    ]
+        .spacing(SPACING / 2)
+        .align_x(Center)
+        .width(Fill)
+}
+
+pub fn channel_strip<'a, Message: Clone + 'a>(
     channel_index: usize,
     channel: &'a ChannelConfig,
-    text_style: F,
     on_change: impl Fn(ChannelConfig) -> Message + Copy + 'static,
 ) -> Element<'a, Message>
-where
-    F: Fn(&iced::Theme) -> text::Style + Copy + 'static,
 {
     let channel_clone = channel.clone();
 
     column![
         text((channel_index + 1).to_string())
             .size(36)
-            .style(text_style),
+            .style(subtle),
         pick_list(
             InputMode::VARIANTS,
             Some(&channel.input.mode),
@@ -52,58 +67,73 @@ where
             .width(Fill),
         match channel.input.mode {
             InputMode::Continuous => column![
-                knob(
-                    "Min In:",
-                    &channel.input.continuous.minimum_input,
-                    0..=127,
-                    move |value| on_change(channel_clone.with_minimum_input(value)),
-                ),
-                knob(
-                    "Max In:",
-                    &channel.input.continuous.maximum_input,
-                    0..=127,
-                    move |value| on_change(channel_clone.with_maximum_input(value)),
-                ),
-                knob(
-                    "Min Out:",
-                    &channel.input.continuous.minimum_output,
-                    0..=127,
-                    move |value| on_change(channel_clone.with_minimum_output(value)),
-                ),
-                knob(
-                    "Max Out:",
-                    &channel.input.continuous.maximum_output,
-                    0..=127,
-                    move |value| on_change(channel_clone.with_maximum_output(value)),
-                ),
-                knob(
-                    "Drive:",
+                row![
+                    labeled_knob(
+                        "Minimum\nInput",
+                        &channel.input.continuous.minimum_input,
+                        0..=127,
+                        move |value| on_change(channel_clone.with_minimum_input(value)),
+                    ),
+                    labeled_knob(
+                        "Maximum\nInput",
+                        &channel.input.continuous.maximum_input,
+                        0..=127,
+                        move |value| on_change(channel_clone.with_maximum_input(value)),
+                    ),
+                ]
+                    .spacing(SPACING)
+                    .align_y(Center)
+                    .width(Fill),
+                row![
+                    labeled_knob(
+                        "Minimum\nOutput",
+                        &channel.input.continuous.minimum_output,
+                        0..=127,
+                        move |value| on_change(channel_clone.with_minimum_output(value)),
+                    ),
+                    labeled_knob(
+                        "Maximum\nOutput",
+                        &channel.input.continuous.maximum_output,
+                        0..=127,
+                        move |value| on_change(channel_clone.with_maximum_output(value)),
+                    ),
+                ]
+                    .spacing(SPACING)
+                    .align_y(Center)
+                    .width(Fill),
+                labeled_knob(
+                    "Drive",
                     &channel.input.continuous.drive,
                     0..=127,
                     move |value| on_change(channel_clone.with_drive(value)),
                 ),
             ],
             _ => column![
-                knob(
-                    "Released Val:",
-                    &channel.input.switch.released_value,
-                    0..=127,
-                    move |value| on_change(channel_clone.with_released_value(value)),
-                ),
-                knob(
-                    "Pressed Val:",
-                    &channel.input.switch.pressed_value,
-                    0..=127,
-                    move |value| on_change(channel_clone.with_pressed_value(value)),
-                ),
+                row![
+                    labeled_knob(
+                        "Released\nValue",
+                        &channel.input.switch.released_value,
+                        0..=127,
+                        move |value| on_change(channel_clone.with_released_value(value)),
+                    ),
+                    labeled_knob(
+                        "Pressed\nValue",
+                        &channel.input.switch.pressed_value,
+                        0..=127,
+                        move |value| on_change(channel_clone.with_pressed_value(value)),
+                    ),
+                ]
+                    .spacing(SPACING)
+                    .align_y(Center)
+                    .width(Fill)
             ],
         }
             .spacing(SPACING)
             .align_x(Center)
             .width(Fill)
             .height(Fill),
-        knob(
-            "CC:",
+        labeled_knob(
+            "CC",
             &channel.cc,
             1..=128,
             move |value| on_change(channel_clone.with_cc(value)),

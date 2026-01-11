@@ -66,9 +66,10 @@ impl ChannelConfig {
     const LABEL_SIZE: usize = 32;
 
     pub fn default_with_index(index: usize) -> Self {
-        let mut config = ChannelConfig::default();
-        config.cc = index as u8;
-        config
+        Self {
+            cc: index as u8,
+            ..Self::default()
+        }
     }
 
     // Builder-style methods for updating config fields

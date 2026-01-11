@@ -1678,6 +1678,7 @@ version = "0.1.0"
 dependencies = [
  "iced",
  "iced_aw",
+ "num-traits",
  "strum",
 ]
 
