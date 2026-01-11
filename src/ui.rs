@@ -1,12 +1,11 @@
 use iced::{Center, Element, Fill, Padding, Pixels, Theme};
-use iced::widget::{column, row, pick_list, text, text_input, Column};
+use iced::widget::{Column, column, pick_list, row, text, text_input};
 use num_traits::{Bounded, Num, NumAssignOps};
 use std::fmt::Display;
 use std::ops::{RangeInclusive};
 use std::str::FromStr;
 use strum::VariantArray;
 
-use crate::widgets::knob::knob;
 use crate::device_config::{ChannelConfig, InputMode};
 
 pub const SPACING: Pixels = Pixels(8.);
@@ -33,7 +32,6 @@ where
             .size(16)
             .style(subtle)
             .align_x(Center),
-        knob(),
         text_input("", &value.to_string())
             .on_input(move |s| {
                 let value: T = s.parse().unwrap_or(T::zero()); // parse string value

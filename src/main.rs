@@ -59,7 +59,6 @@ impl App {
 fn main() -> iced::Result {
     iced::application(App::default, App::update, App::view)
         .theme(Theme::KanagawaDragon)
-        .font(iced_aw::ICED_AW_FONT_BYTES)
         .title(App::title)
         .centered()
         .run()

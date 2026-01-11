@@ -19,7 +19,7 @@ pub fn knob() -> Knob {
 
 impl<Message, Theme, Renderer> Widget<Message, Theme, Renderer> for Knob
 where
-    Renderer: renderer::Renderer
+    Renderer: renderer::Renderer,
 {
     fn size(&self) -> Size<Length> {
         Size {
@@ -66,3 +66,29 @@ where
         Self::new(knob)
     }
 }
+
+
+
+// Alternative Canvas Implementation (not working though)
+// struct KnobProgram;
+
+// impl<Message> canvas::Program<Message> for KnobProgram {
+//     type State = ();
+
+//     fn draw(
+//         &self,
+//         _state: &Self::State,
+//         renderer: &Renderer,
+//         _theme: &Theme,
+//         bounds: Rectangle,
+//         _cursor: iced::advanced::mouse::Cursor,
+//     ) -> Vec<canvas::Geometry> {
+//         let mut frame = canvas::Frame::new(renderer, bounds.size());
+//         frame.stroke(
+//             &Path::circle(bounds.center(), 24.),
+//             canvas::Stroke::default(),
+//         );
+//         vec![frame.into_geometry()]
+//     }
+// }
+
