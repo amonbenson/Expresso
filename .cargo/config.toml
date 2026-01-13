@@ -1,0 +1,26 @@
+# Configuration for embedded target
+[target.thumbv7em-none-eabi]
+runner = "probe-rs run --chip STM32G431CB"
+rustflags = [
+  "-C", "link-arg=-Tlink.x",
+]
+
+# Convenient aliases for common operations
+[alias]
+# Firmware commands
+build-fw = "build -p midibox-fw --target thumbv7em-none-eabi"
+check-fw = "check -p midibox-fw --target thumbv7em-none-eabi"
+run-fw = "run -p midibox-fw --target thumbv7em-none-eabi"
+test-fw = "test -p midibox-fw --target thumbv7em-none-eabi"
+
+# Desktop software commands
+build-sw = "build -p midibox-sw"
+check-sw = "check -p midibox-sw"
+run-sw = "run -p midibox-sw"
+test-sw = "test -p midibox-sw"
+
+# Check all code
+check-all = "check -p midibox-sw && cargo check -p midibox-fw --target thumbv7em-none-eabi"
+
+[env]
+DEFMT_LOG = "trace"

@@ -4,3 +4,5 @@ members = [
     "sw",
     "fw",
 ]
+
+default-members = ["sw"]
