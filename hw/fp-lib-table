@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "DIN5_MIDI")(type "KiCad")(uri "${KIPRJMOD}/lib/DIN5_MIDI.pretty")(options "")(descr ""))
+  (lib (name "SOP-6-2.54mm")(type "KiCad")(uri "${KIPRJMOD}/lib/SOP-6-2.54mm.pretty")(options "")(descr ""))
+)

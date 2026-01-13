@@ -1,0 +1,350 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "0213b4b6-d5a6-4eae-8572-dfe4a2534fc9")
+	(paper "A4")
+	(title_block
+		(title "Midi Expressor")
+		(date "2025-12-26")
+		(rev "0.1")
+		(company "Amon Benson")
+	)
+	(lib_symbols)
+	(wire
+		(pts
+			(xy 143.51 113.03) (xy 146.05 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "015fe06f-1e99-45bb-a2ee-d831433fa76e")
+	)
+	(wire
+		(pts
+			(xy 143.51 138.43) (xy 146.05 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2032fb97-8807-45bc-9fca-a07998ce0e6f")
+	)
+	(wire
+		(pts
+			(xy 143.51 62.23) (xy 146.05 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26ce91bb-7f36-4b0e-821e-e2af5e11d54d")
+	)
+	(wire
+		(pts
+			(xy 143.51 87.63) (xy 146.05 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "56c06ec1-b546-47e2-a3ce-03ce470cc7ce")
+	)
+	(global_label "STM_ADC1_IN4"
+		(shape input)
+		(at 146.05 62.23 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "27a0808d-c2a6-4d02-81fd-5e5b82a0d11b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 162.5818 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "STM_ADC1_IN1"
+		(shape input)
+		(at 146.05 138.43 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3bc6d124-209c-4181-82d7-403abcda3338")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 162.5818 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "STM_ADC1_IN3"
+		(shape input)
+		(at 146.05 87.63 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "89f70624-0a4c-43df-b512-dbf57febbde1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 162.5818 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "STM_ADC1_IN2"
+		(shape input)
+		(at 146.05 113.03 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c2141c10-7650-4eb6-8a95-9345526d4d75")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 162.5818 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(sheet
+		(at 130.81 55.88)
+		(size 12.7 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "1f44e9ce-7aaf-4951-a40b-c817e4d0a4c7")
+		(property "Sheetname" "Expression Input 1"
+			(at 130.81 55.1684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Expression Input.kicad_sch"
+			(at 130.81 69.1646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "EXP_IN" input
+			(at 143.51 62.23 0)
+			(uuid "dd0d66b4-6c73-4378-813a-ec3ce6a881bf")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "Midi Expressor"
+				(path "/1e7cbae1-0003-4e27-ba62-2dd55b10f4f2/d384fc08-7a14-4f66-a318-27ce132b50b2"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 130.81 132.08)
+		(size 12.7 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "51359ecc-89cc-4b20-884e-91a1e6f3fb83")
+		(property "Sheetname" "Expression Input 4"
+			(at 130.81 131.3684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Expression Input.kicad_sch"
+			(at 130.81 145.3646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "EXP_IN" input
+			(at 143.51 138.43 0)
+			(uuid "498862d1-aec9-48d0-a666-a03a5a28f53e")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "Midi Expressor"
+				(path "/1e7cbae1-0003-4e27-ba62-2dd55b10f4f2/d384fc08-7a14-4f66-a318-27ce132b50b2"
+					(page "11")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 130.81 81.28)
+		(size 12.7 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "a3600d74-b3f8-43d8-ba0c-84d986db5879")
+		(property "Sheetname" "Expression Input 2"
+			(at 130.81 80.5684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Expression Input.kicad_sch"
+			(at 130.81 94.5646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "EXP_IN" input
+			(at 143.51 87.63 0)
+			(uuid "1e3db58c-9bbd-4705-b221-5165c077bff1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "Midi Expressor"
+				(path "/1e7cbae1-0003-4e27-ba62-2dd55b10f4f2/d384fc08-7a14-4f66-a318-27ce132b50b2"
+					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 130.81 106.68)
+		(size 12.7 12.7)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b6e017ae-1f83-4869-8b21-85f0180b03f1")
+		(property "Sheetname" "Expression Input 3"
+			(at 130.81 105.9684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Expression Input.kicad_sch"
+			(at 130.81 119.9646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "EXP_IN" input
+			(at 143.51 113.03 0)
+			(uuid "81c32e04-f0b6-4082-845a-b162b969c618")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "Midi Expressor"
+				(path "/1e7cbae1-0003-4e27-ba62-2dd55b10f4f2/d384fc08-7a14-4f66-a318-27ce132b50b2"
+					(page "10")
+				)
+			)
+		)
+	)
+)
