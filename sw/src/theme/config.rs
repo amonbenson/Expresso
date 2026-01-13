@@ -1,4 +1,4 @@
-use iced::{Padding, Pixels, border::Radius, theme::Palette};
+use iced::{theme::Palette};
 
 // Light variant:
 // // https://www.realtimecolors.com/?colors=493628-E4E0E1-8CC26F-e9c359-C14C3D&fonts=Inter-Inter

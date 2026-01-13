@@ -1,5 +1,5 @@
 use iced::{Center, Element, Fill};
-use iced::widget::{Column, Row, button, column, row};
+use iced::widget::{Column, column, row};
 use num_traits::{Bounded, Num, NumAssignOps};
 use std::fmt::Display;
 use std::ops::{RangeInclusive};
