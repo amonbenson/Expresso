@@ -3,6 +3,7 @@ resolver = "3"
 members = [
     "sw",
     "fw",
+    "common",
 ]
 
 default-members = ["sw"]
