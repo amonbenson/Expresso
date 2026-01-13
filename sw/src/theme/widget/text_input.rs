@@ -1,7 +1,8 @@
-use std::borrow::Borrow;
 use iced::theme::Theme;
 use iced::widget::text_input::{TextInput, Style};
 use iced::border::rounded;
+
+use crate::theme::config::RADIUS;
 
 pub fn text_input<'a, Message, Renderer>(
     placeholder: &str,
@@ -18,6 +19,6 @@ where
             placeholder: theme.palette().text.scale_alpha(0.5),
             icon: theme.palette().text,
             selection: theme.palette().primary,
-            border: rounded(2),
+            border: rounded(RADIUS),
         })
 }

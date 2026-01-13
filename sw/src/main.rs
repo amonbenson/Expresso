@@ -2,8 +2,9 @@ use iced::{Center, Element, Fill};
 use iced::widget::{column, row};
 
 use crate::device_config::{ChannelConfig, DeviceConfig};
-use crate::ui::{PADDING, SPACING, channel_strip};
-use crate::theme::expresso_theme;
+use crate::theme::config::{PADDING, SPACING};
+use crate::ui::channel_strip;
+use crate::theme::theme;
 
 mod theme;
 mod ui;
@@ -21,7 +22,7 @@ struct App {
 
 impl App {
     fn title(&self) -> String {
-        format!("Midi Expressor")
+        format!("Expresso")
     }
 
     fn update(&mut self, message: Message) {
@@ -32,7 +33,7 @@ impl App {
         }
     }
 
-    fn view(&self) -> Element<Message> {
+    fn view(&self) -> Element<'_, Message> {
         row(self.device_config.channels
             .iter()
             .enumerate()
@@ -59,7 +60,7 @@ impl App {
 
 fn main() -> iced::Result {
     iced::application(App::default, App::update, App::view)
-        .theme(expresso_theme())
+        .theme(theme())
         .title(App::title)
         .centered()
         .run()

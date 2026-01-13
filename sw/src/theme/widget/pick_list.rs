@@ -3,6 +3,8 @@ use iced::theme::Theme;
 use iced::widget::pick_list::{PickList, Style};
 use iced::border::rounded;
 
+use crate::theme::config::RADIUS;
+
 pub fn pick_list<'a, T, L, V, Message, Renderer>(
     options: L,
     selected: Option<V>,
@@ -21,6 +23,6 @@ where
             background: theme.extended_palette().primary.base.color.into(),
             placeholder_color: theme.extended_palette().primary.base.text.scale_alpha(0.5),
             handle_color: theme.extended_palette().primary.base.text,
-            border: rounded(2),
+            border: rounded(RADIUS),
         })
 }

@@ -67,14 +67,10 @@ pub struct ChannelConfig {
 impl ChannelConfig {
     const LABEL_SIZE: usize = 32;
 
-    pub fn default_with_index(index: usize) -> Self {
-        Self {
-            cc: index as u8,
-            ..Self::default()
-        }
+    pub fn from_index(index: usize) -> Self {
+        Self::default().with_cc(index as u8)
     }
 
-    // Builder-style methods for updating config fields
     pub fn with_input_mode(mut self, mode: InputMode) -> Self {
         self.input.mode = mode;
         self
@@ -125,12 +121,15 @@ impl ChannelConfig {
         self
     }
 
-    pub fn with_label_str(mut self, label_str: &str) -> Self {
-        self.label = std::array::from_fn(|i| label_str.as_bytes().get(i).copied().unwrap_or(0));
-        self
+    pub fn with_label_str(self, label_str: &str) -> Self {
+        self.with_label(std::array::from_fn(|i| label_str
+            .as_bytes()
+            .get(i)
+            .copied()
+            .unwrap_or(0)))
     }
 
-    pub fn label_as_str(&self) -> &str {
+    pub fn label_str(&self) -> &str {
         // Find the first null byte or use the full length
         let end = self.label.iter().position(|&b| b == 0).unwrap_or(Self::LABEL_SIZE);
         std::str::from_utf8(&self.label[..end]).unwrap_or("")
@@ -140,14 +139,14 @@ impl ChannelConfig {
 
 
 #[derive(Debug)]
-pub struct DeviceConfig<const CHANNELS: usize> {
-    pub channels: [ChannelConfig; CHANNELS],
+pub struct DeviceConfig<const C: usize> {
+    pub channels: [ChannelConfig; C],
 }
 
-impl Default for DeviceConfig<4> {
+impl<const C: usize> Default for DeviceConfig<C> {
     fn default() -> Self {
         Self {
-            channels: std::array::from_fn(|i| ChannelConfig::default_with_index(i)),
+            channels: std::array::from_fn(ChannelConfig::from_index),
         }
     }
 }
