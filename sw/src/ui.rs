@@ -1,5 +1,5 @@
 use iced::{Center, Element, Fill, Padding, Pixels, Renderer, Theme};
-use iced::widget::{Column, Row, button, column, pick_list, row, text, text_input};
+use iced::widget::{Column, Row, button, column, row};
 use num_traits::{Bounded, Num, NumAssignOps};
 use std::fmt::Display;
 use std::ops::{RangeInclusive};
@@ -7,15 +7,10 @@ use std::str::FromStr;
 use strum::VariantArray;
 
 use crate::device_config::{ChannelConfig, InputMode};
+use crate::theme::widget::{pick_list, text, primary_text, text_input};
 
 pub const SPACING: Pixels = Pixels(8.);
 pub const PADDING: Padding = Padding::new(8.);
-
-fn subtle(theme: &Theme) -> text::Style {
-    text::Style {
-        color: Some(theme.extended_palette().background.strongest.color),
-    }
-}
 
 pub fn labeled_knob<'a, Message: Clone + 'a, T, F>(
     label: &'a str,
@@ -29,8 +24,6 @@ where
 {
     column![
         text(label)
-            .size(16)
-            .style(subtle)
             .align_x(Center),
         text_input("", &value.to_string())
             .on_input(move |s| {
@@ -54,9 +47,8 @@ pub fn channel_strip<'a, Message: Clone + 'a>(
     let channel_clone = channel.clone();
 
     column![
-        text((channel_index + 1).to_string())
-            .size(36)
-            .style(subtle),
+        primary_text((channel_index + 1).to_string())
+            .size(36),
         pick_list(
             InputMode::VARIANTS,
             Some(&channel.input.mode),

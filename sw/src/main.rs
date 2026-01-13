@@ -1,10 +1,11 @@
-use iced::{Center, Element, Fill, Theme};
+use iced::{Center, Element, Fill};
 use iced::widget::{column, row};
 
 use crate::device_config::{ChannelConfig, DeviceConfig};
 use crate::ui::{PADDING, SPACING, channel_strip};
+use crate::theme::expresso_theme;
 
-mod widgets;
+mod theme;
 mod ui;
 mod device_config;
 
@@ -58,7 +59,7 @@ impl App {
 
 fn main() -> iced::Result {
     iced::application(App::default, App::update, App::view)
-        .theme(Theme::KanagawaDragon)
+        .theme(expresso_theme())
         .title(App::title)
         .centered()
         .run()
