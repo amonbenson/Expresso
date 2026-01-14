@@ -1,8 +1,8 @@
-pub mod palette;
+pub mod config;
 pub mod widget;
 
 use iced::Theme;
 
-pub fn expresso_theme() -> Theme {
-    Theme::custom(String::from("Expresso Theme"), palette::EXPRESSO_PALETTE)
+pub fn theme() -> Theme {
+    Theme::custom(String::from("Expresso"), config::PALETTE)
 }

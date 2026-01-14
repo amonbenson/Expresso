@@ -1,5 +1,5 @@
-use iced::{Center, Element, Fill, Padding, Pixels, Renderer, Theme};
-use iced::widget::{Column, Row, button, column, row};
+use iced::{Center, Element, Fill};
+use iced::widget::{Column, column, row};
 use num_traits::{Bounded, Num, NumAssignOps};
 use std::fmt::Display;
 use std::ops::{RangeInclusive};
@@ -7,10 +7,8 @@ use std::str::FromStr;
 use strum::VariantArray;
 
 use crate::device_config::{ChannelConfig, InputMode};
+use crate::theme::config::SPACING;
 use crate::theme::widget::{pick_list, text, primary_text, text_input};
-
-pub const SPACING: Pixels = Pixels(8.);
-pub const PADDING: Padding = Padding::new(8.);
 
 pub fn labeled_knob<'a, Message: Clone + 'a, T, F>(
     label: &'a str,
@@ -33,7 +31,7 @@ where
             })
             .width(64)
     ]
-        .spacing(SPACING / 2)
+        .spacing(SPACING / 2.)
         .align_x(Center)
         .width(Fill)
 }
@@ -142,7 +140,7 @@ pub fn channel_strip<'a, Message: Clone + 'a>(
             0..=127,
             move |value| on_change(channel_clone.with_cc(value)),
         ),
-        text_input("Label", channel.label_as_str())
+        text_input("Label", channel.label_str())
             .on_input(move |label_str| on_change(channel_clone.with_label_str(&label_str)))
             .width(Fill),
     ]
