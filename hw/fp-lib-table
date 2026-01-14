@@ -2,4 +2,6 @@
   (version 7)
   (lib (name "DIN5_MIDI")(type "KiCad")(uri "${KIPRJMOD}/lib/DIN5_MIDI.pretty")(options "")(descr ""))
   (lib (name "SOP-6-2.54mm")(type "KiCad")(uri "${KIPRJMOD}/lib/SOP-6-2.54mm.pretty")(options "")(descr ""))
+  (lib (name "DIN5_MIDI_MultiGround")(type "KiCad")(uri "${KIPRJMOD}/lib/DIN5_MIDI_MultiGround.pretty")(options "")(descr ""))
+  (lib (name "NE5532DR")(type "KiCad")(uri "${KIPRJMOD}/lib/NE5532DR.pretty")(options "")(descr ""))
 )

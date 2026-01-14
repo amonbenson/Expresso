@@ -2445,7 +2445,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm"
+		(property "Footprint" "NE5532DR:NE5532DR"
 			(at 231.14 52.07 0)
 			(effects
 				(font
@@ -2543,7 +2543,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm"
+		(property "Footprint" "NE5532DR:NE5532DR"
 			(at 157.48 107.95 0)
 			(effects
 				(font
@@ -3281,7 +3281,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm"
+		(property "Footprint" "NE5532DR:NE5532DR"
 			(at 62.23 153.67 0)
 			(effects
 				(font
